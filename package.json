@@ -1,0 +1,21 @@
+{
+  "name": "my-little-starter",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "create-mls": "./bin/create-mls.js"
+  },
+  "files": ["dist", "bin"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
