@@ -27,10 +27,10 @@ pnpm add -g @flbx/my-little-starter
 
 ## Usage
 
-Create a new project using the `create-mls` command:
+Create a new project using the `mls` command:
 
 ```bash
-create-mls my-awesome-project
+mls my-awesome-project
 ```
 
 ### Options
@@ -44,31 +44,31 @@ create-mls my-awesome-project
 **Basic project:**
 
 ```bash
-create-mls my-project
+mls my-project
 ```
 
 **TypeScript project:**
 
 ```bash
-create-mls my-project --typescript
+mls my-project --typescript
 ```
 
 **Tailwind CSS project:**
 
 ```bash
-create-mls my-project --tailwind
+mls my-project --tailwind
 ```
 
 **Full-featured project with TypeScript and Tailwind:**
 
 ```bash
-create-mls my-project --ts --tailwind
+mls my-project --ts --tailwind
 ```
 
 **Create in a specific directory:**
 
 ```bash
-create-mls my-project --directory ./projects
+mls my-project --directory ./projects
 ```
 
 ## Project Structure
@@ -128,7 +128,7 @@ Available scripts:
 
 ## License
 
-MIT © [florian.bx](mailto:creek-memoirs.4b@icloud.com)
+MIT © [florianbx](mailto:creek-memoirs.4b@icloud.com)
 
 ## Contributing
 
@@ -136,7 +136,7 @@ Issues and PRs are welcome!
 
 ## Changelog
 
-### 1.0.0
+### 1.0.2
 
 - Initial release
 - Vite integration

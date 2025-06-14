@@ -5,16 +5,46 @@
   "author": "florian.bx <creek-memoirs.4b@icloud.com>",
   "license": "MIT",
   "description": "A simple starter project for web development with TypeScript, HTML, and CSS / TailwindCSS.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/florianbx/my-little-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/florianbx/my-little-starter/issues"
+  },
+  "homepage": "https://github.com/florianbx/my-little-starter#readme",
+  "keywords": [
+    "starter",
+    "typescript",
+    "html",
+    "css",
+    "tailwindcss",
+    "vite",
+    "boilerplate",
+    "template",
+    "scaffold",
+    "cli"
+  ],
   "bin": {
-    "create-mls": "./bin/create-mls.js"
+    "mls": "./bin/mls.js"
   },
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "commander": "^11.0.0",
