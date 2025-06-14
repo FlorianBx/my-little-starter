@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { FileManager } from "./file-manager";
 
-// Mock des modules Node.js
+
 vi.mock("node:fs", () => ({
   promises: {
     mkdir: vi.fn().mockResolvedValue(undefined),
