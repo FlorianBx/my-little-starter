@@ -45,7 +45,10 @@ export class CreateCommand {
   <title>My Little Starter</title>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <main>
+      <h1>Hello World</h1>
+      <p>Welcome to your starter project!</p>
+    </main> 
 </body>
 </html>`
 
@@ -88,7 +91,10 @@ export class CreateCommand {
   <title>My Little Starter</title>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <main>
+      <h1>Hello World</h1>
+      <p>Welcome to your starter project!</p>
+    </main> 
   <script type="module" src="/scripts/main.ts"></script>
 </body>
 </html>`

@@ -1,7 +1,10 @@
 {
-  "name": "my-little-starter",
+  "name": "@flbx/my-little-starter",
   "version": "1.0.0",
   "type": "module",
+  "author": "florian.bx <creek-memoirs.4b@icloud.com>",
+  "license": "MIT",
+  "description": "A simple starter project for web development with TypeScript, HTML, and CSS / TailwindCSS.",
   "bin": {
     "create-mls": "./bin/create-mls.js"
   },
