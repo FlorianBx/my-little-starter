@@ -13,7 +13,7 @@ export function createCLI(): void {
   program
     .argument('[project-name]', 'Project name', 'my-project')
     .option('--ts, --typescript', 'Add TypeScript support')
-    .option('--tailwind', 'Add Tailwind CSS v4')
+    .option('--tw, --tailwind', 'Add Tailwind CSS v4')
     .option('-d, --directory <dir>', 'Target directory', '.')
     .action(async (projectName, options) => {
       try {

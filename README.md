@@ -12,17 +12,18 @@ A simple and fast CLI tool to bootstrap modern web projects with Vite, TypeScrip
 
 ## Installation
 
-Install globally using npm, yarn, or pnpm:
+Install globally using pnpm, yarn, or npm:
 
 ```bash
+# pnpm
+pnpm add -g @flbx/my-little-starter
+
 # npm
 npm install -g @flbx/my-little-starter
 
 # yarn
 yarn global add @flbx/my-little-starter
 
-# pnpm
-pnpm add -g @flbx/my-little-starter
 ```
 
 ## Usage
@@ -62,7 +63,7 @@ mls my-project --tailwind
 **Full-featured project with TypeScript and Tailwind:**
 
 ```bash
-mls my-project --ts --tailwind
+mls my-project --ts --tw
 ```
 
 **Create in a specific directory:**
