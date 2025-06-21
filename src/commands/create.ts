@@ -19,6 +19,10 @@ export class CreateCommand {
     if (options.tailwind) {
       await this.setupTailwind(projectPath, options.typescript)
     }
+
+    if (options.test) {
+      await this.setupTest(projectPath)
+    }
     
     await this.installDependencies(projectPath, options)
   }
@@ -159,6 +163,10 @@ export default defineConfig({
     await this.fileManager.writeFile(`${projectPath}/vite.config.js`, viteConfig)
     await this.fileManager.writeFile(`${projectPath}/index.html`, indexHtml)
     await this.fileManager.writeFile(`${projectPath}/styles.css`, tailwindConfig)
+  }
+
+  private async setupTest(projectPath: string): Promise<void> {
+    await this.fileManager.createDirectory(`${projectPath}/__tests__`)
   }
 
   private async installDependencies(projectPath: string, options: CreateOptions): Promise<void> {
