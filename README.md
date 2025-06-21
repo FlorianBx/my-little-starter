@@ -1,12 +1,13 @@
 # @flbx/my-little-starter
 
-A simple and fast CLI tool to bootstrap modern web projects with Vite, TypeScript, and Tailwind CSS support.
+A simple and fast CLI tool to bootstrap modern web projects with Vite, TypeScript, Vitest and Tailwind CSS support.
 
 ## Features
 
 - ⚡️ **Vite** - Lightning fast development server
 - 🎨 **Tailwind CSS v4** - Modern utility-first CSS framework (with @tailwindcss/vite)
 - 📝 **TypeScript** - Optional TypeScript support
+- 🧪 **Vitest** - Optional Vitest support
 - 📦 **pnpm** - Fast, disk space efficient package manager
 - 🚀 **Zero config** - Start coding immediately
 
@@ -38,6 +39,7 @@ mls my-awesome-project
 
 - `--ts, --typescript` - Add TypeScript support
 - `--tailwind` - Add Tailwind CSS v4 with Vite integration
+- `--test` - Add Vitest support
 - `-d, --directory <dir>` - Specify target directory (default: current directory)
 
 ### Examples
@@ -60,10 +62,10 @@ mls my-project --typescript
 mls my-project --tailwind
 ```
 
-**Full-featured project with TypeScript and Tailwind:**
+**Full-featured project with TypeScript, Vitest and Tailwind:**
 
 ```bash
-mls my-project --ts --tw
+mls my-project --ts --tw --test
 ```
 
 **Create in a specific directory:**
@@ -134,12 +136,3 @@ MIT © [florianbx](mailto:creek-memoirs.4b@icloud.com)
 ## Contributing
 
 Issues and PRs are welcome!
-
-## Changelog
-
-### 1.0.2
-
-- Initial release
-- Vite integration
-- TypeScript support
-- Tailwind CSS v4 support with @tailwindcss/vite
