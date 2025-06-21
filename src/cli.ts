@@ -14,6 +14,7 @@ export function createCLI(): void {
     .argument('[project-name]', 'Project name', 'my-project')
     .option('--ts, --typescript', 'Add TypeScript support')
     .option('--tw, --tailwind', 'Add Tailwind CSS v4')
+    .option('--test', 'Add Vitest')
     .option('-d, --directory <dir>', 'Target directory', '.')
     .action(async (projectName, options) => {
       try {
@@ -22,6 +23,7 @@ export function createCLI(): void {
         await createCommand.execute(projectName, {
           typescript: options.typescript || false,
           tailwind: options.tailwind || false,
+          test: options.test || false,
           directory: options.directory
         })
         

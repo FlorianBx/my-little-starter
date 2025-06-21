@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { createCLI, CreateCommand } from "./index";
-import type { CreateOptions } from "./index";
+import { createCLI, CreateCommand } from "../index";
+import type { CreateOptions } from "../index";
 
 describe("Index exports", () => {
   it("should export createCLI function", () => {
@@ -17,21 +17,12 @@ describe("Index exports", () => {
     const options: CreateOptions = {
       typescript: true,
       tailwind: false,
+      test: false,
       directory: "./test",
     };
 
     expect(options).toHaveProperty("typescript");
     expect(options).toHaveProperty("tailwind");
     expect(options).toHaveProperty("directory");
-  });
-});
-
-describe("Main Application Logic", () => {
-  it("should return true for a valid condition", () => {
-    expect(true).toBe(true);
-  });
-
-  it("should add two numbers correctly", () => {
-    expect(1 + 1).toBe(2);
   });
 });

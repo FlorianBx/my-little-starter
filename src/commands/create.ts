@@ -172,6 +172,10 @@ export default defineConfig({
       devDeps.push('tailwindcss')
       devDeps.push('@tailwindcss/vite')
     }
+    
+    if (options.test) {
+      devDeps.push('vitest')
+    }
 
     await this.packageInstaller.install(projectPath, devDeps, true)
   }

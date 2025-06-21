@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { CreateCommand } from "./create";
+import { CreateCommand } from "../commands/create";
 import { FileManager } from "../utils/file-manager";
 import { PackageInstaller } from "../utils/package-installer";
 
@@ -33,6 +33,7 @@ describe("CreateCommand", () => {
       const options = {
         typescript: false,
         tailwind: false,
+        test: false,
         directory: ".",
       };
 
@@ -65,6 +66,7 @@ describe("CreateCommand", () => {
       const options = {
         typescript: true,
         tailwind: false,
+        test: false,
         directory: "./projects",
       };
 
@@ -100,6 +102,7 @@ describe("CreateCommand", () => {
       const options = {
         typescript: false,
         tailwind: true,
+        test: false,
         directory: ".",
       };
 
@@ -129,6 +132,7 @@ describe("CreateCommand", () => {
       const options = {
         typescript: true,
         tailwind: true,
+        test: false,
         directory: "./apps",
       };
 
@@ -164,6 +168,7 @@ describe("CreateCommand", () => {
       const options = {
         typescript: false,
         tailwind: false,
+        test: false,
         directory: ".",
       };
 
@@ -183,6 +188,7 @@ describe("CreateCommand", () => {
       const options = {
         typescript: false,
         tailwind: false,
+        test: false,
         directory: "./path/to/projects",
       };
 
