@@ -25,6 +25,10 @@
     "scaffold",
     "cli"
   ],
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "bin": {
     "mls": "./bin/mls.js"
   },
@@ -32,29 +36,35 @@
     "dist",
     "bin",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md"
   ],
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "dev": "tsc --watch",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "pnpm build && pnpm security:check",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "security:audit": "pnpm audit",
+    "security:check": "pnpm audit && pnpm pack --dry-run",
+    "security:update": "pnpm update"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.0.0",
+    "pnpm": ">=8.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "commander": "^11.0.0"
+    "commander": "^11.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@vitest/ui": "^3.2.3",
-    "typescript": "^5.0.0",
-    "vitest": "^3.2.3"
+    "@types/node": "^20.19.2",
+    "@vitest/ui": "^3.2.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

@@ -128,6 +128,16 @@ Available scripts:
 - **Modern** - Uses latest tools and best practices
 - **Fast** - Vite provides instant HMR and fast builds
 - **Flexible** - Add only what you need
+- **Secure** - Minimal dependencies, regular security audits
+
+## Security
+
+This package follows security best practices:
+
+- 🔒 **Minimal Dependencies** - Only essential dependencies included
+- 🛡️ **Regular Audits** - Automated security scanning
+- 📋 **Vulnerability Reporting** - See [SECURITY.md](SECURITY.md)
+- 🔍 **Supply Chain Security** - Verified package integrity
 
 ## License
 

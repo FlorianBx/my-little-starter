@@ -1,0 +1,52 @@
+# Source files
+src/
+tsconfig.json
+tsconfig.build.json
+vitest.config.ts
+
+# Development files  
+.env*
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+**/__tests__/**
+**/*.test.*
+**/*.spec.*
+
+# Development dependencies
+node_modules/
+.pnpm-store/
+
+# Development tools
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Documentation that shouldn't be published
+CLAUDE.md
+my-project/
+
+# Lock files (users should use their preferred package manager)
+package-lock.json
+yarn.lock
+
+# Keep pnpm-lock.yaml for better reproducibility
