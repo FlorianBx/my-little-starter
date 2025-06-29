@@ -198,5 +198,131 @@ describe("CreateCommand", () => {
         "./path/to/projects/nested-project"
       );
     });
+
+    it("should create a project with test option", async () => {
+      const projectName = "test-enabled-project";
+      const options = {
+        typescript: false,
+        tailwind: false,
+        test: true,
+        directory: ".",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./test-enabled-project"
+      );
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./test-enabled-project/__tests__"
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./test-enabled-project",
+        ["vite", "vitest"],
+        true
+      );
+    });
+
+    it("should create a project with TypeScript and test options", async () => {
+      const projectName = "ts-test-project";
+      const options = {
+        typescript: true,
+        tailwind: false,
+        test: true,
+        directory: "./projects",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./projects/ts-test-project"
+      );
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./projects/ts-test-project/scripts"
+      );
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./projects/ts-test-project/__tests__"
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./projects/ts-test-project/tsconfig.json",
+        expect.stringContaining('"target": "ES2020"')
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./projects/ts-test-project",
+        ["vite", "typescript", "vitest"],
+        true
+      );
+    });
+
+    it("should create a project with all options enabled", async () => {
+      const projectName = "full-featured-project";
+      const options = {
+        typescript: true,
+        tailwind: true,
+        test: true,
+        directory: "./apps",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./apps/full-featured-project"
+      );
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./apps/full-featured-project/scripts"
+      );
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./apps/full-featured-project/__tests__"
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./apps/full-featured-project/tsconfig.json",
+        expect.any(String)
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./apps/full-featured-project/vite.config.js",
+        expect.any(String)
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./apps/full-featured-project/index.html",
+        expect.stringContaining('src="/scripts/main.ts"')
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./apps/full-featured-project",
+        ["vite", "typescript", "tailwindcss", "@tailwindcss/vite", "vitest"],
+        true
+      );
+    });
+
+    it("should create a project with Tailwind and test options", async () => {
+      const projectName = "tailwind-test-project";
+      const options = {
+        typescript: false,
+        tailwind: true,
+        test: true,
+        directory: ".",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./tailwind-test-project"
+      );
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./tailwind-test-project/__tests__"
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./tailwind-test-project/vite.config.js",
+        expect.stringContaining("@tailwindcss/vite")
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./tailwind-test-project/styles.css",
+        '@import "tailwindcss";'
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./tailwind-test-project",
+        ["vite", "tailwindcss", "@tailwindcss/vite", "vitest"],
+        true
+      );
+    });
   });
 });
