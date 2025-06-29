@@ -1,16 +1,15 @@
-import { program } from 'commander'
+import { Command } from 'commander'
 import { CreateCommand } from './commands/create.js'
-import chalk from 'chalk'
+import { colors } from './utils/colors.js'
 
 export function createCLI(): void {
   const createCommand = new CreateCommand()
+  const program = new Command()
 
   program
     .name('create-mls')
     .description('My Little Starter - Simple project generator')
-    .version('1.0.0')
-
-  program
+    .version('1.0.8')
     .argument('[project-name]', 'Project name', 'my-project')
     .option('--ts, --typescript', 'Add TypeScript support')
     .option('--tw, --tailwind', 'Add Tailwind CSS v4')
@@ -18,7 +17,7 @@ export function createCLI(): void {
     .option('-d, --directory <dir>', 'Target directory', '.')
     .action(async (projectName, options) => {
       try {
-        console.log(chalk.blue('Creating your project...'))
+        console.log(colors.blue('Creating your project...'))
         
         await createCommand.execute(projectName, {
           typescript: options.typescript || false,
@@ -27,12 +26,12 @@ export function createCLI(): void {
           directory: options.directory
         })
         
-        console.log(chalk.green('Project created successfully!'))
-        console.log(chalk.yellow(`cd ${projectName}`))
-        console.log(chalk.yellow('pnpm dev'))
+        console.log(colors.green('Project created successfully!'))
+        console.log(colors.yellow(`cd ${projectName}`))
+        console.log(colors.yellow('pnpm dev'))
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error(chalk.red('❌ Error:'), error.message)
+          console.error(colors.red('❌ Error:'), error.message)
         }
         process.exit(1)
       }

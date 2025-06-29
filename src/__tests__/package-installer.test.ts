@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { spawn } from "node:child_process";
-import { PackageInstaller } from "./package-installer";
+import { PackageInstaller } from "../utils/package-installer.js";
 
 vi.mock("node:child_process", () => ({
   spawn: vi.fn(),

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { CreateCommand } from "../commands/create";
-import { FileManager } from "../utils/file-manager";
-import { PackageInstaller } from "../utils/package-installer";
+import { CreateCommand } from "../commands/create.js";
+import { FileManager } from "../utils/file-manager.js";
+import { PackageInstaller } from "../utils/package-installer.js";
 
 vi.mock("../utils/file-manager");
 vi.mock("../utils/package-installer");

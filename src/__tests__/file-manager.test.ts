@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { FileManager } from "./file-manager";
+import { FileManager } from "../utils/file-manager.js";
 
 
 vi.mock("node:fs", () => ({
@@ -94,7 +94,6 @@ describe("FileManager", () => {
       const error = new Error("Read-only file system");
       const fs = await import("node:fs");
 
-      // Reset les mocks pour ce test spécifique
       vi.mocked(fs.promises.mkdir).mockResolvedValueOnce(undefined);
       vi.mocked(fs.promises.writeFile).mockRejectedValueOnce(error);
 
