@@ -11,14 +11,14 @@ export class CreateCommand {
     const projectPath = `${options.directory}/${projectName}`
     
     await this.fileManager.createDirectory(projectPath)
-    await this.setupBase(projectPath)
+    await this.setupBase(projectPath, options)
     
     if (options.typescript) {
       await this.setupTypescript(projectPath)
     }
     
     if (options.tailwind) {
-      await this.setupTailwind(projectPath, options.typescript)
+      await this.setupTailwind(projectPath)
     }
 
     if (options.test) {
@@ -28,29 +28,22 @@ export class CreateCommand {
     await this.installDependencies(projectPath, options)
   }
 
-  private async setupBase(projectPath: string): Promise<void> {
+  private async setupBase(projectPath: string, options: CreateOptions): Promise<void> {
     const packageJson = templates.packageJson(projectPath.split('/').pop()!)
 
     await this.fileManager.writeFile(`${projectPath}/package.json`, JSON.stringify(packageJson, null, 2))
-    await this.fileManager.writeFile(`${projectPath}/index.html`, templates.indexHtml)
-    await this.fileManager.writeFile(`${projectPath}/styles.css`, templates.emptyCss)
+    await this.fileManager.writeFile(`${projectPath}/index.html`, templates.indexHtml(options.tailwind, options.typescript))
+    await this.fileManager.writeFile(`${projectPath}/styles.css`, options.tailwind ? templates.tailwindConfig : templates.emptyCss)
   }
-
 
   private async setupTypescript(projectPath: string): Promise<void> {
     await this.fileManager.createDirectory(`${projectPath}/scripts`)
     await this.fileManager.writeFile(`${projectPath}/tsconfig.json`, JSON.stringify(templates.tsConfig, null, 2))
     await this.fileManager.writeFile(`${projectPath}/scripts/main.ts`, templates.mainTs)
-    await this.fileManager.writeFile(`${projectPath}/index.html`, templates.indexHtmlWithTs)
-    await this.fileManager.writeFile(`${projectPath}/styles.css`, templates.emptyCss)
   }
 
-  private async setupTailwind(projectPath: string, hasTypescript: boolean): Promise<void> {
-    const indexHtml = hasTypescript ? templates.indexHtmlWithTailwindAndTs : templates.indexHtmlWithTailwind
-
+  private async setupTailwind(projectPath: string): Promise<void> {
     await this.fileManager.writeFile(`${projectPath}/vite.config.js`, templates.viteConfig)
-    await this.fileManager.writeFile(`${projectPath}/index.html`, indexHtml)
-    await this.fileManager.writeFile(`${projectPath}/styles.css`, templates.tailwindConfig)
   }
 
   private async setupTest(projectPath: string): Promise<void> {

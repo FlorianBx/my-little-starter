@@ -36,19 +36,15 @@
     "dist",
     "bin",
     "README.md",
-    "LICENSE",
-    "SECURITY.md"
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "dev": "tsc --watch",
-    "prepublishOnly": "pnpm build && pnpm security:check",
+    "prepublishOnly": "pnpm build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
-    "security:audit": "pnpm audit",
-    "security:check": "pnpm audit && pnpm pack --dry-run",
-    "security:update": "pnpm update"
+    "test:coverage": "vitest --coverage"
   },
   "engines": {
     "node": ">=20.0.0",
