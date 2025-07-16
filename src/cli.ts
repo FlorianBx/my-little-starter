@@ -14,6 +14,8 @@ export function createCLI(): void {
     .option('--ts, --typescript', 'Add TypeScript support')
     .option('--tw, --tailwind', 'Add Tailwind CSS v4')
     .option('--test', 'Add Vitest')
+    .option('--lint', 'Add OxLint')
+    .option('--format', 'Add Prettier')
     .option('-d, --directory <dir>', 'Target directory', '.')
     .action(async (projectName, options) => {
       try {
@@ -23,6 +25,8 @@ export function createCLI(): void {
           typescript: options.typescript || false,
           tailwind: options.tailwind || false,
           test: options.test || false,
+          lint: options.lint || false,
+          format: options.format || false,
           directory: options.directory
         })
         

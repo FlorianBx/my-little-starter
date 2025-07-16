@@ -1,14 +1,30 @@
 export const templates = {
-  packageJson: (name: string) => ({
-    name,
-    version: '1.0.0',
-    type: 'module',
-    scripts: {
+  packageJson: (name: string, options?: { lint?: boolean, format?: boolean, test?: boolean }) => {
+    const scripts: Record<string, string> = {
       dev: 'vite',
       build: 'vite build',
       preview: 'vite preview'
     }
-  }),
+    
+    if (options?.lint) {
+      scripts.lint = 'oxlint'
+    }
+    
+    if (options?.format) {
+      scripts.format = 'prettier --write .'
+    }
+    
+    if (options?.test) {
+      scripts.test = 'vitest'
+    }
+    
+    return {
+      name,
+      version: '1.0.0',
+      type: 'module',
+      scripts
+    }
+  },
 
   indexHtml: (hasTailwind: boolean = false, hasTypeScript: boolean = false) => {
     const bodyClass = hasTailwind ? ' class="bg-gray-950 text-white flex flex-col items-center justify-center min-h-screen"' : '';
@@ -59,5 +75,28 @@ export default defineConfig({
 
   tailwindConfig: `@import "tailwindcss";`,
 
-  emptyCss: ``
+  emptyCss: ``,
+
+  oxlintConfig: {
+    rules: {}
+  },
+
+  prettierConfig: {
+    printWidth: 80,
+    tabWidth: 2,
+    useTabs: false,
+    semi: true,
+    singleQuote: false,
+    quoteProps: 'as-needed',
+    trailingComma: 'all',
+    bracketSpacing: true,
+    arrowParens: 'always',
+    endOfLine: 'lf'
+  },
+
+  prettierIgnore: `node_modules
+dist
+build
+*.min.js
+*.min.css`
 } as const

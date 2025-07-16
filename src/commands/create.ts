@@ -24,12 +24,20 @@ export class CreateCommand {
     if (options.test) {
       await this.setupTest(projectPath)
     }
+
+    if (options.lint) {
+      await this.setupLint(projectPath)
+    }
+
+    if (options.format) {
+      await this.setupFormat(projectPath)
+    }
     
     await this.installDependencies(projectPath, options)
   }
 
   private async setupBase(projectPath: string, options: CreateOptions): Promise<void> {
-    const packageJson = templates.packageJson(projectPath.split('/').pop()!)
+    const packageJson = templates.packageJson(projectPath.split('/').pop()!, options)
 
     await this.fileManager.writeFile(`${projectPath}/package.json`, JSON.stringify(packageJson, null, 2))
     await this.fileManager.writeFile(`${projectPath}/index.html`, templates.indexHtml(options.tailwind, options.typescript))
@@ -37,7 +45,7 @@ export class CreateCommand {
   }
 
   private async setupTypescript(projectPath: string): Promise<void> {
-    await this.fileManager.createDirectory(`${projectPath}/scripts`)
+    await this.fileManager.createDirectory(`${projectPath}/src`)
     await this.fileManager.writeFile(`${projectPath}/tsconfig.json`, JSON.stringify(templates.tsConfig, null, 2))
     await this.fileManager.writeFile(`${projectPath}/scripts/main.ts`, templates.mainTs)
   }
@@ -47,7 +55,16 @@ export class CreateCommand {
   }
 
   private async setupTest(projectPath: string): Promise<void> {
-    await this.fileManager.createDirectory(`${projectPath}/__tests__`)
+    await this.fileManager.createDirectory(`${projectPath}/tests`)
+  }
+
+  private async setupLint(projectPath: string): Promise<void> {
+    await this.fileManager.writeFile(`${projectPath}/.oxlintrc.json`, JSON.stringify(templates.oxlintConfig, null, 2))
+  }
+
+  private async setupFormat(projectPath: string): Promise<void> {
+    await this.fileManager.writeFile(`${projectPath}/.prettierrc`, JSON.stringify(templates.prettierConfig, null, 2))
+    await this.fileManager.writeFile(`${projectPath}/.prettierignore`, templates.prettierIgnore)
   }
 
   private async installDependencies(projectPath: string, options: CreateOptions): Promise<void> {
@@ -64,6 +81,14 @@ export class CreateCommand {
     
     if (options.test) {
       devDeps.push('vitest')
+    }
+
+    if (options.lint) {
+      devDeps.push('oxlint')
+    }
+
+    if (options.format) {
+      devDeps.push('prettier')
     }
 
     await this.packageInstaller.install(projectPath, devDeps, true)

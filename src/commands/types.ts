@@ -3,4 +3,6 @@ export interface CreateOptions {
   tailwind: boolean;
   directory: string;
   test: boolean;
+  lint: boolean;
+  format: boolean;
 }
