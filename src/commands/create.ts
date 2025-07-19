@@ -47,7 +47,7 @@ export class CreateCommand {
   private async setupTypescript(projectPath: string): Promise<void> {
     await this.fileManager.createDirectory(`${projectPath}/src`)
     await this.fileManager.writeFile(`${projectPath}/tsconfig.json`, JSON.stringify(templates.tsConfig, null, 2))
-    await this.fileManager.writeFile(`${projectPath}/scripts/main.ts`, templates.mainTs)
+    await this.fileManager.writeFile(`${projectPath}/src/main.ts`, templates.mainTs)
   }
 
   private async setupTailwind(projectPath: string): Promise<void> {
