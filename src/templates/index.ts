@@ -86,7 +86,7 @@ export default defineConfig({
     tabWidth: 2,
     useTabs: false,
     semi: true,
-    singleQuote: false,
+    singleQuote: true,
     quoteProps: 'as-needed',
     trailingComma: 'all',
     bracketSpacing: true,

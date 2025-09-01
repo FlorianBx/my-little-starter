@@ -12,7 +12,7 @@ export class PackageInstaller {
         stdio: 'inherit'
       })
 
-      child.on('close', (code) => {
+      child.on('close', (code: number) => {
         if (code === 0) {
           resolve()
         } else {
