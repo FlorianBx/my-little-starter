@@ -30,7 +30,7 @@ export const templates = {
     const bodyClass = hasTailwind ? ' class="bg-gray-950 text-white flex flex-col items-center justify-center min-h-screen"' : '';
     const h1Class = hasTailwind ? ' class="text-8xl font-bold text-emerald-300"' : '';
     const pClass = hasTailwind ? ' class="text-2xl text-gray-400"' : '';
-    const script = hasTypeScript ? '  <script type="module" src="/scripts/main.ts"></script>\n' : '';
+    const script = hasTypeScript ? '  <script type="module" src="/src/main.ts"></script>\n' : '';
     
     return `<!DOCTYPE html>
 <html lang="en">
