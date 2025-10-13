@@ -5,4 +5,5 @@ export interface CreateOptions {
   test: boolean;
   lint: boolean;
   format: boolean;
+  rolldown: boolean;
 }
