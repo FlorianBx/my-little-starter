@@ -37,7 +37,12 @@ export class CreateCommand {
   }
 
   private async setupBase(projectPath: string, options: CreateOptions): Promise<void> {
-    const packageJson = templates.packageJson(projectPath.split('/').pop()!, options)
+    const packageJson = templates.packageJson(projectPath.split('/').pop()!, {
+      lint: options.lint,
+      format: options.format,
+      test: options.test,
+      rolldown: options.rolldown
+    })
 
     await this.fileManager.writeFile(`${projectPath}/package.json`, JSON.stringify(packageJson, null, 2))
     await this.fileManager.writeFile(`${projectPath}/index.html`, templates.indexHtml(options.tailwind, options.typescript))
@@ -68,17 +73,21 @@ export class CreateCommand {
   }
 
   private async installDependencies(projectPath: string, options: CreateOptions): Promise<void> {
-    const devDeps = ['vite']
-    
+    const devDeps = []
+
+    if (!options.rolldown) {
+      devDeps.push('vite')
+    }
+
     if (options.typescript) {
       devDeps.push('typescript')
     }
-    
+
     if (options.tailwind) {
       devDeps.push('tailwindcss')
       devDeps.push('@tailwindcss/vite')
     }
-    
+
     if (options.test) {
       devDeps.push('vitest')
     }
@@ -91,6 +100,12 @@ export class CreateCommand {
       devDeps.push('prettier')
     }
 
-    await this.packageInstaller.install(projectPath, devDeps, true)
+    if (devDeps.length > 0) {
+      await this.packageInstaller.install(projectPath, devDeps, true)
+    }
+
+    if (options.rolldown) {
+      await this.packageInstaller.install(projectPath, ['vite'], false)
+    }
   }
 }

@@ -1,29 +1,37 @@
 export const templates = {
-  packageJson: (name: string, options?: { lint?: boolean, format?: boolean, test?: boolean }) => {
+  packageJson: (name: string, options?: { lint?: boolean, format?: boolean, test?: boolean, rolldown?: boolean }) => {
     const scripts: Record<string, string> = {
       dev: 'vite',
       build: 'vite build',
       preview: 'vite preview'
     }
-    
+
     if (options?.lint) {
       scripts.lint = 'oxlint'
     }
-    
+
     if (options?.format) {
       scripts.format = 'prettier --write .'
     }
-    
+
     if (options?.test) {
       scripts.test = 'vitest'
     }
-    
-    return {
+
+    const packageJson: Record<string, unknown> = {
       name,
       version: '1.0.0',
       type: 'module',
       scripts
     }
+
+    if (options?.rolldown) {
+      packageJson.dependencies = {
+        vite: 'npm:rolldown-vite@latest'
+      }
+    }
+
+    return packageJson
   },
 
   indexHtml: (hasTailwind: boolean = false, hasTypeScript: boolean = false) => {
