@@ -5,6 +5,7 @@ Fast CLI tool to bootstrap modern web projects with Vite, TypeScript, Tailwind C
 ## Features
 
 - Vite - Lightning fast development server
+- Rolldown-Vite - Rust-powered bundler, future default for Vite (3-16x faster builds, currently in beta)
 - Tailwind CSS v4 - Modern utility-first CSS framework
 - TypeScript - Optional TypeScript support
 - Vitest - Optional testing framework
@@ -32,6 +33,7 @@ mls my-project
 - `--test` - Add Vitest support
 - `--lint` - Add OxLint with configuration
 - `--format` - Add Prettier with ES6+ optimized configuration
+- `--rolldown` - Use Rolldown-Vite (Rust-powered bundler, future Vite default)
 - `-d, --directory <dir>` - Target directory
 
 ### Examples
@@ -45,6 +47,9 @@ mls my-project --ts --tailwind --test
 
 # Full stack with linting and formatting
 mls my-project --ts --tailwind --test --lint --format
+
+# With experimental Rolldown bundler
+mls my-project --rolldown --ts --tailwind
 
 # Custom directory
 mls my-project --directory ./projects
