@@ -16,6 +16,7 @@ export function createCLI(): void {
     .option('--test', 'Add Vitest')
     .option('--lint', 'Add OxLint')
     .option('--format', 'Add Prettier')
+    .option('--oxfmt', 'Add OxLint with auto-fix (high-performance formatting)')
     .option('--rolldown', 'Use Rolldown-Vite (Rust-based, beta)')
     .option('-d, --directory <dir>', 'Target directory', '.')
     .action(async (projectName, options) => {
@@ -28,6 +29,7 @@ export function createCLI(): void {
           test: options.test || false,
           lint: options.lint || false,
           format: options.format || false,
+          oxfmt: options.oxfmt || false,
           rolldown: options.rolldown || false,
           directory: options.directory
         })

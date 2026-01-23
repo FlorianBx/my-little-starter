@@ -34,6 +34,10 @@ describe("CreateCommand", () => {
         typescript: false,
         tailwind: false,
         test: false,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: ".",
       };
 
@@ -67,6 +71,10 @@ describe("CreateCommand", () => {
         typescript: true,
         tailwind: false,
         test: false,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: "./projects",
       };
 
@@ -103,6 +111,10 @@ describe("CreateCommand", () => {
         typescript: false,
         tailwind: true,
         test: false,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: ".",
       };
 
@@ -133,6 +145,10 @@ describe("CreateCommand", () => {
         typescript: true,
         tailwind: true,
         test: false,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: "./apps",
       };
 
@@ -169,6 +185,10 @@ describe("CreateCommand", () => {
         typescript: false,
         tailwind: false,
         test: false,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: ".",
       };
 
@@ -189,6 +209,10 @@ describe("CreateCommand", () => {
         typescript: false,
         tailwind: false,
         test: false,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: "./path/to/projects",
       };
 
@@ -205,6 +229,10 @@ describe("CreateCommand", () => {
         typescript: false,
         tailwind: false,
         test: true,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: ".",
       };
 
@@ -229,6 +257,10 @@ describe("CreateCommand", () => {
         typescript: true,
         tailwind: false,
         test: true,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: "./projects",
       };
 
@@ -260,6 +292,10 @@ describe("CreateCommand", () => {
         typescript: true,
         tailwind: true,
         test: true,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: "./apps",
       };
 
@@ -299,6 +335,10 @@ describe("CreateCommand", () => {
         typescript: false,
         tailwind: true,
         test: true,
+        lint: false,
+        format: false,
+        oxfmt: false,
+        rolldown: false,
         directory: ".",
       };
 
@@ -321,6 +361,64 @@ describe("CreateCommand", () => {
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./tailwind-test-project",
         ["vite", "tailwindcss", "@tailwindcss/vite", "vitest"],
+        true
+      );
+    });
+
+    it("should create a project with oxfmt option", async () => {
+      const projectName = "oxfmt-project";
+      const options = {
+        typescript: false,
+        tailwind: false,
+        test: false,
+        lint: false,
+        format: false,
+        oxfmt: true,
+        rolldown: false,
+        directory: ".",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./oxfmt-project"
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./oxfmt-project/.oxlintrc.json",
+        expect.stringContaining('"perf": "all"')
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./oxfmt-project",
+        ["vite", "oxlint"],
+        true
+      );
+    });
+
+    it("should create a project with TypeScript and oxfmt", async () => {
+      const projectName = "ts-oxfmt-project";
+      const options = {
+        typescript: true,
+        tailwind: false,
+        test: false,
+        lint: false,
+        format: false,
+        oxfmt: true,
+        rolldown: false,
+        directory: "./projects",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./projects/ts-oxfmt-project"
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./projects/ts-oxfmt-project/.oxlintrc.json",
+        expect.stringContaining('"perf": "all"')
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./projects/ts-oxfmt-project",
+        ["vite", "typescript", "oxlint"],
         true
       );
     });
