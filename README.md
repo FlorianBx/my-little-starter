@@ -11,7 +11,7 @@ Fast CLI tool to bootstrap modern web projects with Vite, TypeScript, Tailwind C
 - Vitest - Optional testing framework
 - OxLint - Optional super-fast linter (50-100x faster than ESLint)
 - Prettier - Optional code formatting with ES6+ optimized configuration
-- OxLint (oxfmt) - Optional high-performance auto-fix formatting with OxLint
+- oxfmt - Optional high-performance auto-fix formatting using OxLint
 - pnpm - Fast package manager
 - Zero config - Start coding immediately
 

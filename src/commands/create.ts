@@ -101,16 +101,12 @@ export class CreateCommand {
       devDeps.push('vitest')
     }
 
-    if (options.lint) {
+    if (options.lint || options.oxfmt) {
       devDeps.push('oxlint')
     }
 
     if (options.format) {
       devDeps.push('prettier')
-    }
-
-    if (options.oxfmt) {
-      devDeps.push('oxlint')
     }
 
     if (devDeps.length > 0) {

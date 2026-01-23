@@ -113,13 +113,13 @@ build
 *.min.css`,
 
   oxfmtConfig: {
-    "rules": {
-      "correctness": "all",
-      "suspicious": "all",
-      "perf": "all"
+    rules: {
+      correctness: "all",
+      suspicious: "all",
+      perf: "all"
     },
-    "env": {
-      "targets": "defaults"
+    env: {
+      targets: "defaults"
     }
   }
 } as const
