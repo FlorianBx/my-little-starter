@@ -32,10 +32,6 @@ export class CreateCommand {
     if (options.format) {
       await this.setupFormat(projectPath)
     }
-
-    if (options.oxfmt) {
-      await this.setupOxfmt(projectPath)
-    }
     
     await this.installDependencies(projectPath, options)
   }
@@ -44,7 +40,6 @@ export class CreateCommand {
     const packageJson = templates.packageJson(projectPath.split('/').pop()!, {
       lint: options.lint,
       format: options.format,
-      oxfmt: options.oxfmt,
       test: options.test,
       rolldown: options.rolldown
     })
@@ -73,11 +68,6 @@ export class CreateCommand {
   }
 
   private async setupFormat(projectPath: string): Promise<void> {
-    await this.fileManager.writeFile(`${projectPath}/.prettierrc`, JSON.stringify(templates.prettierConfig, null, 2))
-    await this.fileManager.writeFile(`${projectPath}/.prettierignore`, templates.prettierIgnore)
-  }
-
-  private async setupOxfmt(projectPath: string): Promise<void> {
     await this.fileManager.writeFile(`${projectPath}/.oxlintrc.json`, JSON.stringify(templates.oxfmtConfig, null, 2))
   }
 
@@ -101,12 +91,8 @@ export class CreateCommand {
       devDeps.push('vitest')
     }
 
-    if (options.lint || options.oxfmt) {
+    if (options.lint || options.format) {
       devDeps.push('oxlint')
-    }
-
-    if (options.format) {
-      devDeps.push('prettier')
     }
 
     if (devDeps.length > 0) {

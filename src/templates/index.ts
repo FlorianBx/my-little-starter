@@ -1,5 +1,5 @@
 export const templates = {
-  packageJson: (name: string, options?: { lint?: boolean, format?: boolean, oxfmt?: boolean, test?: boolean, rolldown?: boolean }) => {
+  packageJson: (name: string, options?: { lint?: boolean, format?: boolean, test?: boolean, rolldown?: boolean }) => {
     const scripts: Record<string, string> = {
       dev: 'vite',
       build: 'vite build',
@@ -11,11 +11,7 @@ export const templates = {
     }
 
     if (options?.format) {
-      scripts.format = 'prettier --write .'
-    }
-
-    if (options?.oxfmt) {
-      scripts.oxfmt = 'oxlint --fix'
+      scripts.format = 'oxlint --fix'
     }
 
     if (options?.test) {

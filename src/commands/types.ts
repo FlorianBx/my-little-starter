@@ -5,6 +5,5 @@ export interface CreateOptions {
   test: boolean;
   lint: boolean;
   format: boolean;
-  oxfmt: boolean;
   rolldown: boolean;
 }
