@@ -19,6 +19,9 @@ describe("Index exports", () => {
       tailwind: false,
       test: false,
       directory: "./test",
+      lint: false,
+      format: false,
+      rolldown: false,
     };
 
     expect(options).toHaveProperty("typescript");
