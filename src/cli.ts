@@ -15,7 +15,7 @@ export function createCLI(): void {
     .option('--tw, --tailwind', 'Add Tailwind CSS v4')
     .option('--test', 'Add Vitest')
     .option('--lint', 'Add OxLint')
-    .option('--format', 'Add Prettier')
+    .option('--format', 'Add oxfmt (OxLint auto-fix formatting)')
     .option('--rolldown', 'Use Rolldown-Vite (Rust-based, beta)')
     .option('-d, --directory <dir>', 'Target directory', '.')
     .action(async (projectName, options) => {

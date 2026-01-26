@@ -1,6 +1,6 @@
 # @flbx/my-little-starter
 
-Fast CLI tool to bootstrap modern web projects with Vite, TypeScript, Tailwind CSS, Vitest, OxLint, and Prettier.
+Fast CLI tool to bootstrap modern web projects with Vite, TypeScript, Tailwind CSS, Vitest, and OxLint.
 
 ## Features
 
@@ -10,7 +10,7 @@ Fast CLI tool to bootstrap modern web projects with Vite, TypeScript, Tailwind C
 - TypeScript - Optional TypeScript support
 - Vitest - Optional testing framework
 - OxLint - Optional super-fast linter (50-100x faster than ESLint)
-- Prettier - Optional code formatting with ES6+ optimized configuration
+- oxfmt - Optional high-performance auto-fix formatting using OxLint
 - pnpm - Fast package manager
 - Zero config - Start coding immediately
 
@@ -32,7 +32,7 @@ mls my-project
 - `--tailwind` - Add Tailwind CSS v4
 - `--test` - Add Vitest support
 - `--lint` - Add OxLint with configuration
-- `--format` - Add Prettier with ES6+ optimized configuration
+- `--format` - Add oxfmt (OxLint auto-fix formatting)
 - `--rolldown` - Use Rolldown-Vite (Rust-powered bundler, future Vite default)
 - `-d, --directory <dir>` - Target directory
 
@@ -71,7 +71,7 @@ When you generate a project with optional tools, the following scripts are avail
 - `pnpm preview` - Preview production build
 - `pnpm test` - Run tests (with `--test` flag)
 - `pnpm lint` - Run OxLint (with `--lint` flag)
-- `pnpm format` - Format code with Prettier (with `--format` flag)
+- `pnpm format` - Format code with oxfmt (with `--format` flag)
 
 ## Requirements
 

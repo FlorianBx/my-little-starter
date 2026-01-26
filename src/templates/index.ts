@@ -11,7 +11,7 @@ export const templates = {
     }
 
     if (options?.format) {
-      scripts.format = 'prettier --write .'
+      scripts.format = 'oxfmt .'
     }
 
     if (options?.test) {
@@ -86,25 +86,25 @@ export default defineConfig({
   emptyCss: ``,
 
   oxlintConfig: {
-    rules: {}
+    $schema: './node_modules/oxlint/configuration_schema.json',
+    categories: {
+      correctness: 'error',
+      suspicious: 'warn',
+      perf: 'warn',
+      style: 'off',
+      nursery: 'off',
+      pedantic: 'off'
+    },
+    rules: {},
+    ignorePatterns: ['dist', 'node_modules']
   },
 
-  prettierConfig: {
-    printWidth: 80,
-    tabWidth: 2,
-    useTabs: false,
-    semi: true,
-    singleQuote: true,
-    quoteProps: 'as-needed',
+  oxfmtConfig: {
+    $schema: './node_modules/oxfmt/configuration_schema.json',
+    semi: false,
+    printWidth: 100,
     trailingComma: 'all',
-    bracketSpacing: true,
-    arrowParens: 'always',
-    endOfLine: 'lf'
-  },
-
-  prettierIgnore: `node_modules
-dist
-build
-*.min.js
-*.min.css`
+    singleQuote: true,
+    ignorePatterns: ['dist', 'node_modules', 'pnpm-lock.yaml']
+  }
 } as const

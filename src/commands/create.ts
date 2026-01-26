@@ -68,8 +68,7 @@ export class CreateCommand {
   }
 
   private async setupFormat(projectPath: string): Promise<void> {
-    await this.fileManager.writeFile(`${projectPath}/.prettierrc`, JSON.stringify(templates.prettierConfig, null, 2))
-    await this.fileManager.writeFile(`${projectPath}/.prettierignore`, templates.prettierIgnore)
+    await this.fileManager.writeFile(`${projectPath}/.oxfmtrc.json`, JSON.stringify(templates.oxfmtConfig, null, 2))
   }
 
   private async installDependencies(projectPath: string, options: CreateOptions): Promise<void> {
@@ -97,7 +96,7 @@ export class CreateCommand {
     }
 
     if (options.format) {
-      devDeps.push('prettier')
+      devDeps.push('oxfmt')
     }
 
     if (devDeps.length > 0) {
