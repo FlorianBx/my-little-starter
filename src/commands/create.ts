@@ -68,7 +68,7 @@ export class CreateCommand {
   }
 
   private async setupFormat(projectPath: string): Promise<void> {
-    await this.fileManager.writeFile(`${projectPath}/.oxlintrc.json`, JSON.stringify(templates.oxfmtConfig, null, 2))
+    await this.fileManager.writeFile(`${projectPath}/.oxfmtrc.json`, JSON.stringify(templates.oxfmtConfig, null, 2))
   }
 
   private async installDependencies(projectPath: string, options: CreateOptions): Promise<void> {
@@ -91,8 +91,12 @@ export class CreateCommand {
       devDeps.push('vitest')
     }
 
-    if (options.lint || options.format) {
+    if (options.lint) {
       devDeps.push('oxlint')
+    }
+
+    if (options.format) {
+      devDeps.push('oxfmt')
     }
 
     if (devDeps.length > 0) {
