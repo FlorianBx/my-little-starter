@@ -82,19 +82,19 @@ describe("CreateCommand", () => {
         "./projects/ts-project"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./projects/ts-project/scripts"
+        "./projects/ts-project/src"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./projects/ts-project/tsconfig.json",
         expect.stringContaining('"target": "ES2020"')
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
-        "./projects/ts-project/scripts/main.ts",
+        "./projects/ts-project/src/main.ts",
         expect.stringContaining("console.log('Hello from TypeScript!')")
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./projects/ts-project/index.html",
-        expect.stringContaining('src="/scripts/main.ts"')
+        expect.stringContaining('src="/src/main.ts"')
       );
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./projects/ts-project",
@@ -154,7 +154,7 @@ describe("CreateCommand", () => {
         "./apps/full-project"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./apps/full-project/scripts"
+        "./apps/full-project/src"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./apps/full-project/tsconfig.json",
@@ -166,7 +166,7 @@ describe("CreateCommand", () => {
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./apps/full-project/index.html",
-        expect.stringContaining('src="/scripts/main.ts"')
+        expect.stringContaining('src="/src/main.ts"')
       );
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./apps/full-project",
@@ -235,7 +235,7 @@ describe("CreateCommand", () => {
         "./test-enabled-project"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./test-enabled-project/__tests__"
+        "./test-enabled-project/tests"
       );
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./test-enabled-project",
@@ -262,10 +262,10 @@ describe("CreateCommand", () => {
         "./projects/ts-test-project"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./projects/ts-test-project/scripts"
+        "./projects/ts-test-project/src"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./projects/ts-test-project/__tests__"
+        "./projects/ts-test-project/tests"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./projects/ts-test-project/tsconfig.json",
@@ -296,10 +296,10 @@ describe("CreateCommand", () => {
         "./apps/full-featured-project"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./apps/full-featured-project/scripts"
+        "./apps/full-featured-project/src"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./apps/full-featured-project/__tests__"
+        "./apps/full-featured-project/tests"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./apps/full-featured-project/tsconfig.json",
@@ -311,7 +311,7 @@ describe("CreateCommand", () => {
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./apps/full-featured-project/index.html",
-        expect.stringContaining('src="/scripts/main.ts"')
+        expect.stringContaining('src="/src/main.ts"')
       );
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./apps/full-featured-project",
@@ -338,7 +338,7 @@ describe("CreateCommand", () => {
         "./tailwind-test-project"
       );
       expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
-        "./tailwind-test-project/__tests__"
+        "./tailwind-test-project/tests"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
         "./tailwind-test-project/vite.config.js",
@@ -351,6 +351,34 @@ describe("CreateCommand", () => {
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./tailwind-test-project",
         ["vite", "tailwindcss", "@tailwindcss/vite", "vitest"],
+        true
+      );
+    });
+
+    it("should create a project with lint option", async () => {
+      const projectName = "lint-project";
+      const options = {
+        typescript: false,
+        tailwind: false,
+        test: false,
+        lint: true,
+        format: false,
+        rolldown: false,
+        directory: ".",
+      };
+
+      await createCommand.execute(projectName, options);
+
+      expect(mockFileManager.createDirectory).toHaveBeenCalledWith(
+        "./lint-project"
+      );
+      expect(mockFileManager.writeFile).toHaveBeenCalledWith(
+        "./lint-project/.oxlintrc.json",
+        expect.stringContaining('"perf": "warn"')
+      );
+      expect(mockPackageInstaller.install).toHaveBeenCalledWith(
+        "./lint-project",
+        ["vite", "oxlint"],
         true
       );
     });
@@ -373,12 +401,12 @@ describe("CreateCommand", () => {
         "./format-project"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
-        "./format-project/.oxlintrc.json",
-        expect.stringContaining('"perf": "all"')
+        "./format-project/.oxfmtrc.json",
+        expect.stringContaining('"semi": false')
       );
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./format-project",
-        ["vite", "oxlint"],
+        ["vite", "oxfmt"],
         true
       );
     });
@@ -401,12 +429,12 @@ describe("CreateCommand", () => {
         "./projects/ts-format-project"
       );
       expect(mockFileManager.writeFile).toHaveBeenCalledWith(
-        "./projects/ts-format-project/.oxlintrc.json",
-        expect.stringContaining('"perf": "all"')
+        "./projects/ts-format-project/.oxfmtrc.json",
+        expect.stringContaining('"semi": false')
       );
       expect(mockPackageInstaller.install).toHaveBeenCalledWith(
         "./projects/ts-format-project",
-        ["vite", "typescript", "oxlint"],
+        ["vite", "typescript", "oxfmt"],
         true
       );
     });

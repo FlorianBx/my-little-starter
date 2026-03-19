@@ -69,7 +69,7 @@ ${script}</body>
       noEmit: true,
       strict: true
     },
-    include: ['scripts']
+    include: ['src']
   },
 
   mainTs: `console.log('Hello from TypeScript!')`,
